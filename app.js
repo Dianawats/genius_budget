@@ -12,7 +12,7 @@ var budgetController = (function(){
         this.description = description;
         this.value = value;
     };
-    
+
 
     var data = {
         allItems: {
@@ -23,8 +23,30 @@ var budgetController = (function(){
             exp: 0,
             inc: 0
         }
+    };
 
-    }
+//return an object again that will contain all public methods
+//for now it's addItem
+    return{
+        addItem: function(type, des, val){
+            var newItem, ID;
+
+            ID = 0;
+
+            if (type === 'exp'){
+                newItem =  new Expense(ID, des, val);
+
+            } else if (type=== 'inc') {
+                newItem =  new Income(ID, des, val);
+
+            }
+            //add item to data structure
+            data.allItems[type].push(newItem);
+            return newItem;
+
+        }
+
+    };
     
 
 })();
