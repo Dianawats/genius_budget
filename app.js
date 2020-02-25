@@ -31,10 +31,9 @@ var budgetController = (function(){
         var sum = 0;
         //loop over this array
         data.allItems[type].forEach(function(cur) {
-            sum = sum += cur.value;
+            sum += cur.value;
         });
         data.totals[type] = sum;
-
     };
 
 
@@ -45,7 +44,7 @@ var budgetController = (function(){
         },
         totals: {
             exp: 0,
-            inc: 0,
+            inc: 0
         },
         budget: 0,
         percentage: -1
@@ -91,7 +90,6 @@ var budgetController = (function(){
             // data.allItems[type][id];
             ids = data.allItems[type].map(function(current) {
                 return current.id;
-
             });
 
             index = ids.indexOf(id);
@@ -132,9 +130,7 @@ var budgetController = (function(){
              */
             data.allItems.exp.forEach(function(cur) {
                 cur.calcPercentage(data.totals.inc);
-
             });
-
         },
 
         getPercentages: function() {
@@ -143,22 +139,22 @@ var budgetController = (function(){
 
             });
             return allPerc;
-            
         },
 
         getBudget: function() {
             return {
                 budget: data.budget,
-                totalTnc: data.totals.inc,
+                totalInc: data.totals.inc,
                 totalExp: data.totals.exp,
                 percentage: data.percentage
             };
-
         },
 
+        testing: function() {
+            console.log(data);
+        }
     };
     
-
 })();
 
 
@@ -183,7 +179,7 @@ var UIController = (function() {
     };
 
     var formatNumber = function(num, type) {
-        var numSplit, int, dec;
+        var numSplit, int, dec, type;
 
         /*
         + or - before number exactly 2 decimal points
@@ -223,7 +219,6 @@ var UIController = (function() {
                 description: document.querySelector(DOMstrings.inputDescription).value, 
                 value: parseFloat(document.querySelector(DOMstrings.inputValue).value )
             };
-
         },
 
         addListItem: function(obj, type) {
@@ -435,6 +430,7 @@ var controller = (function(budgetCtrl, UICtrl) {
             updateBudget();
 
             //4. Calculate and update percentages
+            updatePercentages();
 
         }
 
@@ -459,9 +455,3 @@ var controller = (function(budgetCtrl, UICtrl) {
 })(budgetController, UIController);
 
 controller.init();
-
-
-
-
-
-
